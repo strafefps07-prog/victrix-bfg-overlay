@@ -223,3 +223,14 @@
 .controller .button.triangle.pressed { outline: 2px solid var(--bfg-green); }
 .controller .button.cross.pressed    { outline: 2px solid var(--bfg-cyan); }
 .controller .button.circle.pressed   { outline: 2px solid var(--bfg-red); }
+
+/* ---------- Disconnected message fix ---------- */
+.controller .disconnected {
+  display: block !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  font-size: 22px;
+  text-align: center;
+  margin-top: 50px;
+}
+
