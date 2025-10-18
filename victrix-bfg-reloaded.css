@@ -205,7 +205,7 @@
 }
 
 /* ---------- Optional: Hide labels if you want super-clean look ---------- */
-/* .help, #prompt { display: none !important; } */
+/* .help, #prompt { display: block !important; } */
 
 /* ---------- Optional: Minimalistic mode ---------- */
 /* Add &minimal=1 to your GV URL and use this to tighten layout
