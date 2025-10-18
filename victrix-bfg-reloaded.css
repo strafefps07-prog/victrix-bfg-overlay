@@ -1,0 +1,225 @@
+/* Victrix Pro BFG Reloaded — Gamepad Viewer Custom CSS
+   Author: ChatGPT (GPT-5 Thinking)
+   Notes:
+   - Designed for the PS layout in Gamepad Viewer.
+   - Add a Browser Source in OBS with a Gamepad Viewer URL (e.g. https://gamepadviewer.com/?p=1&s=ps&editcss=1)
+   - Paste this CSS in the 'Custom CSS' box (or host this file and append &css=<URL-ENCODED-CSS-LINK>).
+   - Accent color matches Victrix purple; dark stealth body; subtle neon on press.
+*/
+
+:root {
+  --bfg-body: #0f1014;           /* deep matte black */
+  --bfg-body-2: #161822;         /* panel contrast */
+  --bfg-stroke: #2a2e3b;
+  --bfg-purple: #7d32ff;         /* Victrix-ish purple */
+  --bfg-purple-2: #a279ff;
+  --bfg-cyan: #57e3ff;
+  --bfg-green: #7bff8a;
+  --bfg-amber: #ffcf5a;
+  --bfg-red: #ff637d;
+  --bfg-text: #d8dcff;
+  --bfg-muted: #8a90a8;
+  --bfg-press: 0.25s ease;
+}
+
+/* ---------- Layout / Scale ---------- */
+.controller {
+  transform: scale(1);
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,0.45));
+}
+
+.controller .disconnected { display: none !important; }
+
+/* Root background for the skin (if GV shows a base outline) */
+.controller.ps {
+  background: radial-gradient(1200px 600px at 50% 30%, rgba(125,50,255,0.08), transparent 60%);
+}
+
+/* ---------- Body / Panels ---------- */
+.controller .face, 
+.controller .bumpers, 
+.controller .triggers, 
+.controller .touchpad,
+.controller .meta, 
+.controller .back, 
+.controller .sticks-container {
+  filter: none !important;
+}
+
+.controller .front, 
+.controller .back, 
+.controller .triggers, 
+.controller .bumpers, 
+.controller .meta {
+  background: linear-gradient(180deg, var(--bfg-body) 0%, var(--bfg-body-2) 100%) !important;
+  border-radius: 18px;
+  border: 1px solid var(--bfg-stroke);
+}
+
+/* Outline glow accent */
+.controller .front {
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.02),
+    0 0 0 2px rgba(125,50,255,0.08),
+    0 12px 26px rgba(0,0,0,0.35);
+}
+
+/* ---------- Face Buttons (Cross / Circle / Square / Triangle) ---------- */
+.controller .abxy, .controller .buttons {
+  filter: none !important;
+}
+
+.controller .button {
+  background: linear-gradient(180deg, #1a1d27, #0f1118) !important;
+  border: 1px solid var(--bfg-stroke);
+  box-shadow: inset 0 -2px 0 rgba(255,255,255,0.04);
+  transition: transform var(--bfg-press), box-shadow var(--bfg-press), filter var(--bfg-press);
+}
+
+.controller .button:before, 
+.controller .button:after { display: none !important; }
+
+/* PS glyph tinting */
+.controller.ps .button.square  { box-shadow: inset 0 0 12px rgba(125,50,255,0.25); }
+.controller.ps .button.cross   { box-shadow: inset 0 0 12px rgba(87,227,255,0.25);  }
+.controller.ps .button.circle  { box-shadow: inset 0 0 12px rgba(255,99,125,0.25);  }
+.controller.ps .button.triangle{ box-shadow: inset 0 0 12px rgba(123,255,138,0.25); }
+
+/* Press feedback */
+.controller .button.pressed {
+  transform: translateY(1px) scale(0.98);
+  filter: drop-shadow(0 0 10px rgba(125,50,255,0.5));
+  border-color: var(--bfg-purple);
+}
+
+/* ---------- D-Pad ---------- */
+.controller .dpad .face {
+  background: linear-gradient(180deg, #151822, #0d0f14) !important;
+  border: 1px solid var(--bfg-stroke);
+  border-radius: 12px;
+  box-shadow: inset 0 -2px 0 rgba(255,255,255,0.03);
+}
+
+.controller .dpad .pressed {
+  background: linear-gradient(180deg, #221a2e, #151225) !important;
+  border-color: var(--bfg-purple);
+  filter: drop-shadow(0 0 8px rgba(125,50,255,0.45));
+}
+
+/* ---------- Sticks ---------- */
+.controller .stick {
+  background: radial-gradient(circle at 50% 40%, #1b1e28, #0b0d13 70%);
+  border: 1px solid var(--bfg-stroke);
+  border-radius: 50%;
+  box-shadow: inset 0 -3px 6px rgba(255,255,255,0.05);
+  transition: transform var(--bfg-press);
+}
+
+.controller .stick.pressed {
+  transform: scale(0.97);
+  box-shadow: 0 0 0 2px rgba(125,50,255,0.4), inset 0 -3px 6px rgba(255,255,255,0.05);
+}
+
+/* Stick rings */
+.controller .stick:after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px dashed rgba(125,50,255,0.4);
+  box-shadow: 0 0 16px rgba(125,50,255,0.25);
+  pointer-events: none;
+}
+
+/* ---------- Bumpers ---------- */
+.controller .bumper {
+  background: linear-gradient(180deg, #1a1d27, #0f1118) !important;
+  border: 1px solid var(--bfg-stroke);
+  border-radius: 10px;
+}
+.controller .bumper.pressed {
+  border-color: var(--bfg-purple);
+  filter: drop-shadow(0 0 12px rgba(125,50,255,0.35));
+}
+
+/* ---------- Triggers ---------- */
+.controller .trigger {
+  position: relative;
+  background: linear-gradient(180deg, #1a1d27, #0f1118) !important;
+  border: 1px solid var(--bfg-stroke);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Fill bar to reflect analog value (GV sets height via inline style where supported) */
+.controller .trigger .value {
+  position: absolute;
+  left: 0; bottom: 0; right: 0;
+  height: 0%;
+  background: linear-gradient(180deg, rgba(125,50,255,0.9), rgba(162,121,255,0.85));
+  box-shadow: 0 0 18px rgba(125,50,255,0.55);
+  transition: height 60ms linear;
+}
+
+/* When pressed, outline glow */
+.controller .trigger.pressed {
+  box-shadow: 0 0 16px rgba(125,50,255,0.35);
+  border-color: var(--bfg-purple);
+}
+
+/* ---------- Touchpad / Options / Share / PS Button ---------- */
+.controller .touchpad {
+  background: linear-gradient(180deg, #181b25, #0c0e14) !important;
+  border: 1px solid var(--bfg-stroke);
+  border-radius: 12px;
+}
+.controller .touchpad.pressed { border-color: var(--bfg-purple); }
+
+.controller .meta, .controller .back, .controller .start {
+  background: radial-gradient(circle at 50% 50%, #181b25, #0c0e14);
+  border: 1px solid var(--bfg-stroke);
+  border-radius: 10px;
+}
+.controller .meta.pressed, .controller .back.pressed, .controller .start.pressed {
+  border-color: var(--bfg-purple);
+  filter: drop-shadow(0 0 10px rgba(125,50,255,0.45));
+}
+
+/* ---------- Guide LEDs / Accent Underglow ---------- */
+.controller.ps:after {
+  content: "";
+  position: absolute;
+  inset: -14px -32px -18px -32px;
+  pointer-events: none;
+  background:
+    radial-gradient(400px 120px at 50% 110%, rgba(125,50,255,0.18), transparent 70%),
+    radial-gradient(260px 90px at 20% 110%, rgba(87,227,255,0.12), transparent 70%),
+    radial-gradient(260px 90px at 80% 110%, rgba(255,99,125,0.12), transparent 70%);
+  filter: blur(10px);
+}
+
+/* ---------- Labels / Helper text ---------- */
+#prompt, .helper, .help {
+  color: var(--bfg-muted) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+
+/* ---------- Optional: Hide labels if you want super-clean look ---------- */
+/* .help, #prompt { display: none !important; } */
+
+/* ---------- Optional: Minimalistic mode ---------- */
+/* Add &minimal=1 to your GV URL and use this to tighten layout
+.controller { transform: scale(0.86); } */
+
+/* ---------- Extras (if your GV build exposes paddles as extra buttons) ----------
+   Note: Default Gamepad Viewer PS layout does not include rear paddles.
+   If paddles are mapped to extra buttons (e.g., L4/R4 or share combos),
+   they will inherit .button styles above. You can target IDs/classes provided by your GV build, e.g.:
+   .controller .button.l4, .controller .button.r4 { ... }
+*/
+
+/* ---------- Color-blind friendliness tweak ---------- */
+.controller .button.square.pressed   { outline: 2px solid var(--bfg-purple); }
+.controller .button.triangle.pressed { outline: 2px solid var(--bfg-green); }
+.controller .button.cross.pressed    { outline: 2px solid var(--bfg-cyan); }
+.controller .button.circle.pressed   { outline: 2px solid var(--bfg-red); }
